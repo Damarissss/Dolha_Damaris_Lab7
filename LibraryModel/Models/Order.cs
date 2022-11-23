@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dolha_Damaris_Lab2.Models
+namespace LibraryModel.Models
 {
     public class Order
     {

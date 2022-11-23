@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\CustomersController.cs" />
     <Compile Remove="Controllers\Publishers1Controller.cs" />
     <Compile Remove="Migrations\20221030173802_InitialCreate.cs" />
     <Compile Remove="Migrations\20221030173802_InitialCreate.Designer.cs" />
@@ -27,6 +28,36 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Authors\Create.cshtml" />
+    <None Include="Views\Authors\Delete.cshtml" />
+    <None Include="Views\Authors\Details.cshtml" />
+    <None Include="Views\Authors\Edit.cshtml" />
+    <None Include="Views\Authors\Index.cshtml" />
+    <None Include="Views\Books\Create.cshtml" />
+    <None Include="Views\Books\Delete.cshtml" />
+    <None Include="Views\Books\Details.cshtml" />
+    <None Include="Views\Books\Edit.cshtml" />
+    <None Include="Views\Books\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Home\Statistics.cshtml" />
+    <None Include="Views\Publishers\Create.cshtml" />
+    <None Include="Views\Publishers\Delete.cshtml" />
+    <None Include="Views\Publishers\Details.cshtml" />
+    <None Include="Views\Publishers\Edit.cshtml" />
+    <None Include="Views\Publishers\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryModel\LibraryModel.csproj" />
   </ItemGroup>
 
 </Project>

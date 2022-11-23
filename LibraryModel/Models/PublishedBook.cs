@@ -1,4 +1,4 @@
-﻿namespace Dolha_Damaris_Lab2.Models
+﻿namespace LibraryModel.Models
 {
     public class PublishedBook
     {

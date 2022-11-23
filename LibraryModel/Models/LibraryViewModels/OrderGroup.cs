@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dolha_Damaris_Lab2.Models.LibraryViewModels
+namespace LibraryModel.Models.LibraryViewModels
 {
     public class OrderGroup
     {

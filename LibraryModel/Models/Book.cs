@@ -1,4 +1,4 @@
-﻿using MessagePack;
+﻿//using MessagePack;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dolha_Damaris_Lab2.Models
+namespace LibraryModel.Models
 {
     public class Book
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace Dolha_Damaris_Lab2.Models
+namespace LibraryModel.Models
 {
     public class Author
     {

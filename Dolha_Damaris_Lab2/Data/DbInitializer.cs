@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Dolha_Damaris_Lab2.Models;
+using LibraryModel.Models;
+using LibraryModel.Data;
+using Dolha_Damaris_Lab2.Data;
 using static NuGet.Packaging.PackagingConstants;
 using static System.Reflection.Metadata.BlobBuilder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dolha_Damaris_Lab2.Data
 {

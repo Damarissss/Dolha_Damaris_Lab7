@@ -1,11 +1,11 @@
-﻿using Dolha_Damaris_Lab2.Models;
+﻿using LibraryModel.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dolha_Damaris_Lab2.Data
+namespace LibraryModel.Data
 {
     public class LibraryContext: DbContext
     {
-        public LibraryContext(DbContextOptions<LibraryContext> options): base(options)
+        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
         }
         public DbSet<Customer> Customers { get; set; }
@@ -28,6 +28,6 @@ namespace Dolha_Damaris_Lab2.Data
             // Configureaza cheia primara compusa
             modelBuilder.Entity<PublishedBook>().HasKey(c => new { c.BookID, c.PublisherID });
         }
-        public DbSet<Dolha_Damaris_Lab2.Models.Author> Authors { get; set; }
+        public DbSet<LibraryModel.Models.Author> Authors { get; set; }
     }
 }

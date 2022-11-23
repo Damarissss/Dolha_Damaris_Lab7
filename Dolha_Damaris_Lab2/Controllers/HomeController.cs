@@ -1,9 +1,10 @@
-﻿using Dolha_Damaris_Lab2.Models;
+﻿using LibraryModel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Dolha_Damaris_Lab2.Data;
-using Dolha_Damaris_Lab2.Models.LibraryViewModels;
+using LibraryModel.Data;
+using LibraryModel.Models.LibraryViewModels;
 
 namespace Dolha_Damaris_Lab2.Controllers
 {

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dolha_Damaris_Lab2.Data;
-using Dolha_Damaris_Lab2.Models;
+using LibraryModel.Data;
+using LibraryModel.Models;
 
 namespace Dolha_Damaris_Lab2.Controllers
 {
