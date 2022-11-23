@@ -30,7 +30,7 @@
                         <tr>
                             @{
                                 int cnt = 0;
-                                List<Dolha_Damaris_Lab2.Models.LibraryViewModels.PublishedBookData> books = ViewBag.Books;
+                                List<LibraryModel.Models.LibraryViewModels.PublishedBookData> books = ViewBag.Books;
                                 foreach (var book in books)
                                 {
                                     if (cnt++ % 3 == 0)

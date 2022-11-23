@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using LibraryModel.Data;
+using LibraryModel.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
