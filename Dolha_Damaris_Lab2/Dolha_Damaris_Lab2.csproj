@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\CustomersController.cs" />
     <Compile Remove="Controllers\Publishers1Controller.cs" />
     <Compile Remove="Migrations\20221030173802_InitialCreate.cs" />
     <Compile Remove="Migrations\20221030173802_InitialCreate.Designer.cs" />
@@ -54,10 +53,6 @@
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\LibraryModel\LibraryModel.csproj" />
   </ItemGroup>
 
 </Project>
