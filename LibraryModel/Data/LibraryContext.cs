@@ -15,6 +15,7 @@ namespace LibraryModel.Data
         //public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<PublishedBook> PublishedBooks { get; set; }
+        public DbSet<LibraryModel.Models.City> Cities { get; set; }
 
         // The code in the OnModelCreating method of the DbContext class uses the fluent API to configure EF behavior.
         // The API is called "fluent" because it's often used by stringing a series of method calls together into a single statement
@@ -28,6 +29,7 @@ namespace LibraryModel.Data
             modelBuilder.Entity<PublishedBook>().ToTable("PublishedBook");
             // Configureaza cheia primara compusa
             modelBuilder.Entity<PublishedBook>().HasKey(c => new { c.BookID, c.PublisherID });
+            modelBuilder.Entity<City>().ToTable("City");
         }
         public DbSet<LibraryModel.Models.Author> Authors { get; set; }
     }

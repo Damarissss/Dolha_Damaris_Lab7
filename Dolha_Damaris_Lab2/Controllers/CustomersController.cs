@@ -15,7 +15,7 @@ namespace Dolha_Damaris_Lab2.Controllers
     public class CustomersController : Controller
     {
         private readonly LibraryContext _context;
-        private string _baseUrl = "http://localhost:5206/api/Customers";
+        private string _baseUrl = "https://localhost:7179/api/Customers";
 
         public CustomersController(LibraryContext context)
         {
@@ -31,11 +31,12 @@ namespace Dolha_Damaris_Lab2.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var customers = JsonConvert.DeserializeObject<List<Customer>>(await response.Content.ReadAsStringAsync());
-                return View(customers);
+                var libraryContext = _context.Customers.Include(cn => cn.City);
+                return View(await libraryContext.ToListAsync());
             }
             return NotFound();
-
         }
+
 
         // GET: Customers/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -49,14 +50,27 @@ namespace Dolha_Damaris_Lab2.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var customer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
-                return View(customer);
+                if (_context.Customers == null)
+                {
+                    return NotFound();
+                }
+                var city = await _context.Customers
+                    .Include(a => a.City)
+                    .FirstOrDefaultAsync(m => m.CustomerID == id);
+                if (city == null)
+                {
+                    return NotFound();
+                }
+                return View(city);
             }
             return NotFound();
         }
 
+
         // GET: Customers/Create
         public IActionResult Create()
         {
+            ViewBag.CityID = new SelectList(_context.Cities, "ID", "CityName");
             return View();
         }
 
@@ -65,17 +79,21 @@ namespace Dolha_Damaris_Lab2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("CustomerID,Name,Adress,BirthDate")] Customer customer)
+        public async Task<ActionResult> Create([Bind("CustomerID,Name,Adress,BirthDate,CityID")] Customer customer)
         {
             if (!ModelState.IsValid) return View(customer);
             try
             {
                 var client = new HttpClient();
                 string json = JsonConvert.SerializeObject(customer);
-                var response = await client.PostAsync(_baseUrl,
-                new StringContent(json, Encoding.UTF8, "application/json"));
+                var response = await client.PostAsync(_baseUrl, new StringContent(json, Encoding.UTF8, "application/json"));
                 if (response.IsSuccessStatusCode)
                 {
+                    if (ModelState.IsValid)
+                    {
+                        _context.Customers.Add(customer);
+                        await _context.SaveChangesAsync();
+                    }
                     return RedirectToAction("Index");
                 }
             }
@@ -83,6 +101,7 @@ namespace Dolha_Damaris_Lab2.Controllers
             {
                 ModelState.AddModelError(string.Empty, $"Unable to create record: { ex.Message} ");
             }
+            ViewBag.CityID = new SelectList(_context.Cities, "ID", "CityName", customer.CityID);
             return View(customer);
         }
 
@@ -90,7 +109,7 @@ namespace Dolha_Damaris_Lab2.Controllers
         // GET: Customers/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Customers == null)
             {
                 return new BadRequestResult();
             }
@@ -99,18 +118,23 @@ namespace Dolha_Damaris_Lab2.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var customer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
-                return View(customer);
+                var city = await _context.Customers.FindAsync(id);
+                if (city == null || customer == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.CityID = new SelectList(_context.Cities, "ID", "CityName");
+                return View(city);
             }
             return new NotFoundResult();
         }
-
 
         // POST: Customers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind("CustomerID,Name,Adress,BirthDate")] Customer customer)
+        public async Task<ActionResult> Edit([Bind("CustomerID,Name,Adress,BirthDate,CityID")] Customer customer)
         {
             if (!ModelState.IsValid) return View(customer);
             var client = new HttpClient();
@@ -121,6 +145,27 @@ namespace Dolha_Damaris_Lab2.Controllers
             {
                 return RedirectToAction("Index");
             }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(customer);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CustomerExists(customer.CustomerID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.CityID = new SelectList(_context.Cities, "ID", "CityName", customer.CityID);
             return View(customer);
         }
 
@@ -137,7 +182,14 @@ namespace Dolha_Damaris_Lab2.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var customer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
-                return View(customer);
+                var city = await _context.Customers
+                    .Include(a => a.City)
+                    .FirstOrDefaultAsync(m => m.CustomerID == id);
+                if (city == null)
+                {
+                    return NotFound();
+                }
+                return View(city);
             }
             return new NotFoundResult();
         }
@@ -161,6 +213,7 @@ namespace Dolha_Damaris_Lab2.Controllers
             {
                 ModelState.AddModelError(string.Empty, $"Unable to delete record: { ex.Message} ");
             }
+
             return View(customer);
         }
 
@@ -182,6 +235,7 @@ namespace Dolha_Damaris_Lab2.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool CustomerExists(int id)
         {

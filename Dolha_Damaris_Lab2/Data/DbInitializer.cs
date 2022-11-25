@@ -67,6 +67,19 @@ namespace Dolha_Damaris_Lab2.Data
                     context.Books.Add(b);
                 }
                 context.SaveChanges();
+                
+                var cities = new City[]
+                {
+                    new City{CityName="Cluj-Napoca"},
+                    new City{CityName="Brasov"},
+                    new City{CityName="Iasi"},
+                    new City{CityName="Bucuresti"}
+                };
+                foreach (City c in cities)
+                {
+                    context.Cities.Add(c);
+                }
+                context.SaveChanges();
 
                 //context.Customers.AddRange(
                 var customers = new Customer[]
@@ -75,13 +88,15 @@ namespace Dolha_Damaris_Lab2.Data
                 {
                     Name = "Popescu Marcela",
                     Adress = "Str. Plopilor, nr. 24",
-                    BirthDate = DateTime.Parse("1979 - 09 - 01")
+                    BirthDate = DateTime.Parse("1979 - 09 - 01"),
+                    CityID = cities.Single(i => i.CityName == "Cluj-Napoca").ID
                 },
                 new Customer
                 {
                     Name = "Mihailescu Cornel",
                     Adress = "Str. Bucuresti, nr. 45, ap. 2",
-                    BirthDate = DateTime.Parse("1969 - 07 - 08")
+                    BirthDate = DateTime.Parse("1969 - 07 - 08"),
+                    CityID = cities.Single(i => i.CityName == "Bucuresti").ID
                 }
                 };
                 foreach (Customer t in customers)
