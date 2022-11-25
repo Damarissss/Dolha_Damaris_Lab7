@@ -14,6 +14,7 @@ namespace LibraryModel.Models
         public string? Adress { get; set; }
 
         [Display(Name= "Date of birth")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public ICollection<Order>? Orders { get; set; }
         public int CityID { get; set; }
