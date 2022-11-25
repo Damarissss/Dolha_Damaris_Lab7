@@ -15,7 +15,7 @@ namespace Dolha_Damaris_Lab2.Controllers
     public class CustomersController : Controller
     {
         private readonly LibraryContext _context;
-        private string _baseUrl = "http://localhost:5206/api/Customers";
+        private string _baseUrl = "https://localhost:7179/api/Customers";
 
         public CustomersController(LibraryContext context)
         {
