@@ -89,11 +89,6 @@ namespace Dolha_Damaris_Lab2.Controllers
                 var response = await client.PostAsync(_baseUrl, new StringContent(json, Encoding.UTF8, "application/json"));
                 if (response.IsSuccessStatusCode)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        _context.Customers.Add(customer);
-                        await _context.SaveChangesAsync();
-                    }
                     return RedirectToAction("Index");
                 }
             }
@@ -144,26 +139,6 @@ namespace Dolha_Damaris_Lab2.Controllers
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
-            }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.CustomerID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
             ViewBag.CityID = new SelectList(_context.Cities, "ID", "CityName", customer.CityID);
             return View(customer);
@@ -218,7 +193,7 @@ namespace Dolha_Damaris_Lab2.Controllers
         }
 
         // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
