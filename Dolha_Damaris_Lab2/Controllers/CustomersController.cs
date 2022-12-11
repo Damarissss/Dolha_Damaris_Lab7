@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using LibraryModel.Data;
 using LibraryModel.Models;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ using System.Text;
 
 namespace Dolha_Damaris_Lab2.Controllers
 {
+    [Authorize(Policy = "SalesManager")]
     public class CustomersController : Controller
     {
         private readonly LibraryContext _context;

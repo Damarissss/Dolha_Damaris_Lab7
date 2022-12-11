@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <Content Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
+    <Compile Remove="Models\LibraryViewModels\**" />
+    <Content Remove="Models\LibraryViewModels\**" />
+    <EmbeddedResource Remove="Models\LibraryViewModels\**" />
+    <None Remove="Models\LibraryViewModels\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,9 +23,19 @@
     <Compile Remove="Migrations\20221108173945_ExtendedModel.cs" />
     <Compile Remove="Migrations\20221108173945_ExtendedModel.Designer.cs" />
     <Compile Remove="Migrations\LibraryContextModelSnapshot.cs" />
+    <Compile Remove="Models\Author.cs" />
+    <Compile Remove="Models\Book.cs" />
+    <Compile Remove="Models\City.cs" />
+    <Compile Remove="Models\Customer.cs" />
+    <Compile Remove="Models\ErrorViewModel.cs" />
+    <Compile Remove="Models\Order.cs" />
+    <Compile Remove="Models\PublishedBook.cs" />
+    <Compile Remove="Models\Publisher.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
