@@ -16,7 +16,7 @@ builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(b
 
 builder.Services.Configure<IdentityOptions>(options => {
     // Default Lockout settings
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
     options.Lockout.MaxFailedAccessAttempts = 3;
     options.Lockout.AllowedForNewUsers = true;
 

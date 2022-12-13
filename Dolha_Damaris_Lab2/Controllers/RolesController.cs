@@ -103,6 +103,7 @@ namespace Dolha_Damaris_Lab2.Controllers
                             Errors(result);
                     }
                 }
+             
             }
             if (ModelState.IsValid)
                 return RedirectToAction(nameof(Index));
