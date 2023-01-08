@@ -1,6 +1,4 @@
-//using GrpcCustomersService.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using GrpcCustomersService;
 using LibraryModel.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,21 +15,10 @@ var app = builder.Build();
 app.MapGrpcService<GrpcCrudService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
-app.Run();
-
-//namespace GrpcCustomersService
+//app.UseEndpoints(endpoints =>
 //{
-//    public class Program
-//    {
-//        public Program(IConfiguration configuration)
-//        {
-//            Configuration = configuration;
-//        }
-//        public IConfiguration Configuration { get; }
-//        public void ConfigureServices(IServiceCollection services)
-//        {
-//            services.AddGrpc();
-//            services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-//        }
-//    }
-//}
+//    endpoints.MapGrpcService<GrpcCrudService>(); // "GrpcCrudService" is the corresponding service
+//    endpoints.MapControllers();
+//});
+
+app.Run();
