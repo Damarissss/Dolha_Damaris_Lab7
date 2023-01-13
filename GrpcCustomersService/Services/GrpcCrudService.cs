@@ -57,7 +57,7 @@ public class GrpcCrudService : CustomerService.CustomerServiceBase
         db.SaveChanges();
         return Task.FromResult(new Empty());
     }
-    public override Task<Customer> Update(Customer requestData, ServerCallContext context)
+    public override Task<Customer> Update(Customer requestData, ServerCallContext context) // Customer instead of "Empty"
     {
         db.Customers.Update(new ModelAccess.Customer()
         {
